@@ -8,5 +8,9 @@
     "start": "node server.js"
   },
   "author": "majutre",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7"
+  }
 }
