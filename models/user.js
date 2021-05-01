@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 //const movies = require('./movie')
 
 const userSchema = mongoose.Schema({
@@ -16,7 +17,14 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    userPassword: {
+        type: String,
+        required: true
+    },
+
     //movies
 });
+
+userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', userSchema);
