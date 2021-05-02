@@ -35,7 +35,7 @@ router.post('/:id', (req, res, next) => {
         movieId: req.body.movieId,
         userId: req.body.userId
     }
-    console.log(data);
+   
     User.updateOne(
             { _id: data.userId },
             { $push: {moviesId: data.movieId} } 
