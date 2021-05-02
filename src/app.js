@@ -7,6 +7,7 @@ const movieRoutes = require('../routes/movies');
 const app = express();
 
 mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', true);
 
 mongoose
     .connect('mongodb://localhost:27017/moviedb-demo', {

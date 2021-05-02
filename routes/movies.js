@@ -13,15 +13,20 @@ router.get('/list', (req, res, next) => {
 
 router.get('/list/:id', (req, res, next) => {
 
-    User.findOne(req.params.id)
-        .populate('movies')
-        .exec((err, user) => {
-            if (err) {
-                console.log(err);
-            }
-            console.log(movies)
+    User.findById(req.params.id)
+        .then(user => {
 
-            res.status(201).json(user);
+            if (user) {
+                if (user.moviesId){
+                    res.status(200).json(user.moviesId);
+                } else {
+                    res.status(200).json('Movie list is empty');
+                }
+            } else {
+                res.status(404).json({
+                    message: 'User not found.'
+                });
+            }
         });
 });
 
@@ -30,7 +35,6 @@ router.post('/:id', (req, res, next) => {
         movieId: req.body.movieId,
         userId: req.body.userId
     }
-    
     console.log(data);
     User.updateOne(
             { _id: data.userId },

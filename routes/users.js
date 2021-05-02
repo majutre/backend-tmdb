@@ -12,7 +12,6 @@ router.use(express.json());
 router.get('', (req, res, next) => {
     User.find()
         .then(users => {
-            console.log(users);
             res.status(200).json(users);
         });
 });
@@ -22,7 +21,6 @@ router.get('/:id', (req, res, next) => {
         .then(user => {
 
             if (user) {
-                console.log(user);
                 res.status(200).json(user);
             } else {
                 res.status(404).json({
@@ -32,14 +30,14 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
-router.put('/:id', checkAuth, (req, res, next) => {
-    User.findByIdAndUpdate(req.params.id)
-        .then(user => {
-            console.log(user);
+router.put('/:id',  (req, res, next) => {
+    User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+        .then((user => {
             res.status(200).json({
-                message: 'Update successful.'
+                message: 'Update successful.',
+                user: user
             });
-        });
+        }));
 });
 
 router.post('/signup', (req, res, next) => {
@@ -48,7 +46,7 @@ router.post('/signup', (req, res, next) => {
         userEmail: req.body.userEmail,
         userCpf: req.body.userCpf
     });
-
+    console.log(user);
     user.save()
         .then(newUser => {
             res.status(201).json({

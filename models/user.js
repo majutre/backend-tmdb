@@ -17,13 +17,10 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    userPassword: {
-        type: String,
-        required: true
-    },
+    
     moviesId: [{
-        //type: mongoose.Schema.Types.ObjectId, ref: 'Movie'
-        type: Number
+        type: Number,
+        unique: true
     }]
 });
 
