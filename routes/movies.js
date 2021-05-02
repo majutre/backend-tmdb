@@ -26,12 +26,16 @@ router.get('/list/:id', (req, res, next) => {
 });
 
 router.post('/:id', (req, res, next) => {
-
-    // const userId:
-    const movieId = req.body.movieId;
-    console.log(movieId);
-    User.updateOne({_id: req.params.id},
-        {$push: {moviesId: movieId}})
+    const data = {
+        movieId: req.body.movieId,
+        userId: req.body.userId
+    }
+    
+    console.log(data);
+    User.updateOne(
+            { _id: data.userId },
+            { $push: {moviesId: data.movieId} } 
+        )
         .then((response) => {
             res.status(200).json({
                 message: 'Movie added.'
