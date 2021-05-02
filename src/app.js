@@ -2,8 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const userRoutes = require('../routes/users');
+const movieRoutes = require('../routes/movies');
 
 const app = express();
+
+mongoose.set('useUnifiedTopology', true);
 
 mongoose
     .connect('mongodb://localhost:27017/moviedb-demo', {
@@ -16,23 +19,24 @@ mongoose
         console.log('Connection to DB failed.');
     });
 
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
         'Access-Control-Allow-Headers',
-        'Origin, X-Request-With, Content-Type, Accept, Authorization'
+        'Origin, X-Request-With, Content-Type, Accept, Authorization',
     );
     res.setHeader(
         'Access-Control-Allow-Methods',
-        'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+        'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD'
     );
+    res.header('Access-Control-Allow-Credentials', true);
+
     next();
 });
 
 app.use('/api/users', userRoutes);
+app.use('/api/movies', movieRoutes);
 
 
 module.exports = app;

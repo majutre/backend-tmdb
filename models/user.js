@@ -21,8 +21,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-
-    //movies
+    moviesId: [{
+        //type: mongoose.Schema.Types.ObjectId, ref: 'Movie'
+        type: Number
+    }]
 });
 
 userSchema.plugin(uniqueValidator);
