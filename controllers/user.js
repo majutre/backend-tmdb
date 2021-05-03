@@ -74,7 +74,7 @@ exports.login = (req, res, next) => {
                     email: user.email,
                     cpf: user.cpf
                 },
-                'secret_token_that_should_be_long', {
+                process.env.JWT_KEY, {
                     expiresIn: '1h'
                 }
             );

@@ -1,0 +1,6 @@
+{
+    "env": {
+        "MONGO_DB": "mongodb://localhost:27017/moviedb-demo",
+        "JWT_KEY": "secret_token_that_should_be_long"
+    }
+}

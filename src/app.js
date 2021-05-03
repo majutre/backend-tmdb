@@ -10,7 +10,7 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.set('useFindAndModify', true);
 
 mongoose
-    .connect('mongodb://localhost:27017/moviedb-demo', {
+    .connect(process.env.MONGO_DB, {
         useNewUrlParser: true
     })
     .then(() => {

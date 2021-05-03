@@ -3,8 +3,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
-const UserController = require('../controllers/user')
-const checkAuth = require('../middleware/check-auth')
+const UserController = require('../controllers/user');
+const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
 router.use(express.json());
